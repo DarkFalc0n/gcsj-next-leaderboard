@@ -10,30 +10,35 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 
 export default function Home(props: any) {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<any>(null);
+  const [studentData, setStudentData] = useState<any>(null);
   const [completion, setCompletion] = useState({ genAi: 0, all: 0 });
   useEffect(() => {
-    let genAi = 0,
-      all = 0;
-    props.data.filter((student: any) => {
-      if (student.allCompleted) all++;
-      if (student.genAIbadges === 1) genAi++;
-    });
-    setCompletion({ genAi, all });
-    const sortedData = props.data.sort((a: any, b: any) => {
-      const aBadges = a.skillBadges + a.genAIbadges + a.courseBadges;
-      const bBadges = b.skillBadges + b.genAIbadges + b.courseBadges;
-      if (aBadges > bBadges) return -1;
-      if (aBadges < bBadges) return 1;
-      if (aBadges === bBadges) {
-        if (a.lastBadgeDate < b.lastBadgeDate) return -1;
-        if (a.lastBadgeDate > b.lastBadgeDate) return 1;
-      }
-      return 0;
-    });
-    setData(sortedData);
-    console.log(sortedData);
-    setLoading(false);
+    fetch("/api/db")
+      .then((res) => res.json())
+      .then((data) => {
+        let genAi = 0,
+          all = 0;
+
+        data.dataArray.filter((student: any) => {
+          if (student.allCompleted) all++;
+          if (student.genAIbadges === 1) genAi++;
+        });
+        setCompletion({ genAi, all });
+        const sortedData = data.dataArray.sort((a: any, b: any) => {
+          const aBadges = a.skillBadges + a.genAIbadges + a.courseBadges;
+          const bBadges = b.skillBadges + b.genAIbadges + b.courseBadges;
+          if (aBadges > bBadges) return -1;
+          if (aBadges < bBadges) return 1;
+          if (aBadges === bBadges) {
+            if (a.lastBadgeDate < b.lastBadgeDate) return -1;
+            if (a.lastBadgeDate > b.lastBadgeDate) return 1;
+          }
+          return 0;
+        });
+        setStudentData(sortedData);
+        console.log(sortedData);
+        setLoading(false);
+      });
   }, []);
   return (
     <main
@@ -57,24 +62,7 @@ export default function Home(props: any) {
           genaiCompleted={completion.genAi}
         />
       )}
-      {!loading && <LeaderBoard data={data} />}
+      {!loading && <LeaderBoard data={studentData} />}
     </main>
   );
-}
-
-export async function getServerSideProps() {
-  try {
-    if (process.env.MONGODB_URI === undefined)
-      throw new Error("Mongo URI not found");
-    const client = await MongoClient.connect(process.env.MONGODB_URI);
-    const db = client.db("badges");
-
-    const data = await db.collection("students").find({}).toArray();
-
-    return {
-      props: { data: JSON.parse(JSON.stringify(data)) },
-    };
-  } catch (e) {
-    console.error(e);
-  }
 }
