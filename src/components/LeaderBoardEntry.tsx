@@ -9,7 +9,7 @@ const LeaderBoardEntry = (props: any) => {
           : ""
       }`}
     >
-      <div className="w-12 flex flex-col justify-center">{props.rank}</div>
+      <div className="w-12 flex flex-col justify-center ml-3">{props.rank}</div>
       <div className="truncate whitespace-nowrap w-2/4 text-center">
         {props.name}
       </div>
@@ -18,9 +18,9 @@ const LeaderBoardEntry = (props: any) => {
           <>
             <div className="font-medium text-center md:block hidden">
               Completed:{" "}
-              {new Date(props.lastBadgeDate).toLocaleString("default", {
-                month: "short",
+              {new Date(props.lastBadgeDate).toLocaleString("en-uk", {
                 day: "2-digit",
+                month: "short",
               })}
             </div>
             <div className="font-medium text-center md:hidden">
@@ -31,16 +31,20 @@ const LeaderBoardEntry = (props: any) => {
               {new Date(props.lastBadgeDate).toLocaleString("default", {
                 month: "2-digit",
               })}
+              /
+              {new Date(props.lastBadgeDate).toLocaleString("default", {
+                year: "2-digit",
+              })}
             </div>
           </>
         )}
         {!props.isComplete && (
           <>
             <div className="font-medium text-center md:block hidden">
-              {props.badges} Badge(s) earned
+              {props.badges}/9 Badge{props.badges > 1 ? "s" : ""} earned
             </div>
             <div className="font-medium text-center md:hidden">
-              {props.badges} badge(s)
+              {props.badges}/9 badge{props.badges > 1 ? "s" : ""}
             </div>
           </>
         )}

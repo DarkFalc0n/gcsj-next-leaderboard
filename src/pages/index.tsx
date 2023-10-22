@@ -42,7 +42,7 @@ export default function Home(props: any) {
   }, []);
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-start py-16 md:py-24 px-12 ${montserrat.className}`}
+      className={`flex min-h-screen flex-col items-center justify-start py-16 md:py-24 md:px-12 px-4 ${montserrat.className}`}
     >
       <div className="md:text-5xl text-3xl font-bold text-center">
         Google Cloud Study Jam 2023
