@@ -9,8 +9,10 @@ const LeaderBoardEntry = (props: any) => {
           : ""
       }`}
     >
-      <div className="w-12">{props.rank}</div>
-      <div className="w-2/4 text-center">{props.name}</div>
+      <div className="w-12 flex flex-col justify-center">{props.rank}</div>
+      <div className="truncate whitespace-nowrap w-2/4 text-center">
+        {props.name}
+      </div>
       <div className="w-2/5">
         {props.isComplete && (
           <>
