@@ -15,7 +15,7 @@ const LeaderBoard = (props: any) => {
             student.genAIbadges + student.skillBadges + student.courseBadges
           }
           isComplete={student.allCompleted}
-          lastBadgeDate={student.lastBadgeDate}
+          badgeDates={student.badgeDates}
         />
       ))}
     </div>
