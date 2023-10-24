@@ -30,8 +30,8 @@ export default function Home(props: any) {
           if (aBadges > bBadges) return -1;
           if (aBadges < bBadges) return 1;
           if (aBadges === bBadges) {
-            if (a.lastBadgeDate < b.lastBadgeDate) return -1;
-            if (a.lastBadgeDate > b.lastBadgeDate) return 1;
+            if (a.badgeDates < b.badgeDates) return -1;
+            if (a.badgeDates > b.badgeDates) return 1;
           }
           return 0;
         });
