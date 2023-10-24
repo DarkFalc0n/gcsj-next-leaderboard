@@ -18,21 +18,21 @@ const LeaderBoardEntry = (props: any) => {
           <>
             <div className="font-medium text-center md:block hidden">
               Completed:{" "}
-              {new Date(props.lastBadgeDate).toLocaleString("en-uk", {
+              {new Date(props.badgeDates[0]).toLocaleString("en-uk", {
                 day: "2-digit",
                 month: "short",
               })}
             </div>
             <div className="font-medium text-center md:hidden">
-              {new Date(props.lastBadgeDate).toLocaleString("default", {
+              {new Date(props.badgeDates[0]).toLocaleString("default", {
                 day: "2-digit",
               })}
               /
-              {new Date(props.lastBadgeDate).toLocaleString("default", {
+              {new Date(props.badgeDates[0]).toLocaleString("default", {
                 month: "2-digit",
               })}
               /
-              {new Date(props.lastBadgeDate).toLocaleString("default", {
+              {new Date(props.badgeDates[0]).toLocaleString("default", {
                 year: "2-digit",
               })}
             </div>
