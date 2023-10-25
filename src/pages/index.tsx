@@ -5,6 +5,7 @@ import LeaderBoard from "@/components/LeaderBoard";
 import { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 import { MongoClient } from "mongodb";
+import GoalBanner from "@/components/GoalBanner";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -58,11 +59,15 @@ export default function Home(props: any) {
           <BarLoader color="white" className="mx-auto mt-8" />
         </div>
       )}
+
       {!loading && (
-        <Stats
-          allCompleted={completion.all}
-          genaiCompleted={completion.genAi}
-        />
+        <>
+          {completion.all >= 80 && <GoalBanner />}
+          <Stats
+            allCompleted={completion.all}
+            genaiCompleted={completion.genAi}
+          />
+        </>
       )}
       {!loading && <LeaderBoard data={studentData} />}
     </main>
