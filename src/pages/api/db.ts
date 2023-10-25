@@ -17,6 +17,7 @@ export default function handler(
         .toArray()
         .then((result: any) => {
           res.send({ dataArray: result });
+          client.close();
         });
     });
   } catch (err) {
