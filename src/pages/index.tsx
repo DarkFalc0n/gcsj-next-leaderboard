@@ -25,8 +25,10 @@ export default function Home(props: any) {
         });
         setCompletion({ genAi, all });
         const sortedData = data.dataArray.sort((a: any, b: any) => {
-          const aBadges = a.skillBadges + a.genAIbadges + a.courseBadges;
-          const bBadges = b.skillBadges + b.genAIbadges + b.courseBadges;
+          let aBadges = a.skillBadges + a.genAIbadges + a.courseBadges;
+          let bBadges = b.skillBadges + b.genAIbadges + b.courseBadges;
+          if (aBadges > 9) aBadges = 9;
+          if (bBadges > 9) bBadges = 9;
           if (aBadges > bBadges) return -1;
           if (aBadges < bBadges) return 1;
           if (aBadges === bBadges) {
