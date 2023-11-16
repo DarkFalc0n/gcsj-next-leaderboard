@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Head from "next/head";
 import { Montserrat } from "next/font/google";
 import Stats from "@/components/Stats";
 import LeaderBoard from "@/components/LeaderBoard";
@@ -47,6 +47,17 @@ export default function Home(props: any) {
     <main
       className={`flex min-h-screen flex-col items-center justify-start py-16 md:py-24 md:px-12 px-4 ${montserrat.className}`}
     >
+      <Head>
+        <title>Google Cloud Study Jam Leaderboard</title>
+        <meta
+          property="og:title"
+          content="Google Cloud Study Jam Leaderboard"
+        />
+        <meta
+          property="og:image"
+          content="https://image.slidesharecdn.com/googlecloudstudayjam2019cloudstudyjam-190823112734/75/google-cloud-study-jam-2019-cloud-studyjam-1-2048.jpg?cb=1670204952"
+        />
+      </Head>
       <div className="md:text-5xl text-3xl font-bold text-center">
         Google Cloud Study Jam 2023
       </div>
